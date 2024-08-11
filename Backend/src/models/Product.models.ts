@@ -8,15 +8,16 @@ class Product extends Model {
     @Column({
         type: DataType.STRING(100)
     })
-    name: string
+    declare name: string
     @Column({
         type: DataType.FLOAT(6,2)
     })
-    price: number
+    declare price: number
+    @Default(true) // le paso el valor por default antes de inicializar la conlumna correspondiente para que tome el valor por defecto correcto
     @Column({
         type:DataType.BOOLEAN
     })
-    availability: boolean
+    declare availability: boolean
 }
 
 export default Product
