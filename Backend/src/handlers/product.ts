@@ -82,11 +82,32 @@ export const updateAvailability = async (req: Request, res: Response) => {
         }
 
         //actualizo los datos
-
-        await product.update(req.body)
+        // console.log(product.dataValues.availability)
+        product.availability = !product.dataValues.availability // en vez de utilizarr el update() y mandar el dato por el body ya le asigno a ese campo el valor contrario que tiene en base de datos accediendo atraves de dataValues.
         await product.save() // despues de actualizarlo lo guardo en la BBDD
  
         res.json({data:product})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteProducto = async (req: Request, res: Response) => {
+    try {
+
+        //Compruebo si existe el producto
+        const { id } = req.params
+        const product = await Product.findByPk(id)
+ 
+        if (!product) {
+            return res.status(404).json({error:'producto no encontrado'})
+        }
+
+        //Elimino el registro
+       
+       await product.destroy()
+       res.json({ data: 'Producto Eliminado' })
+        
     } catch (error) {
         console.log(error)
     }
