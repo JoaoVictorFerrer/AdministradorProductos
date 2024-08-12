@@ -10,7 +10,7 @@ class Product extends Model {
     })
     declare name: string
     @Column({
-        type: DataType.FLOAT(6,2)
+        type: DataType.FLOAT
     })
     declare price: number
     @Default(true) // le paso el valor por default antes de inicializar la conlumna correspondiente para que tome el valor por defecto correcto

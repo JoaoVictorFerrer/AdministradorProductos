@@ -9,8 +9,8 @@ export const ValidationProduct =  async (req: Request, res: Response, next: Next
     await check('price')
         .isNumeric().withMessage('Valor no valido')
         .notEmpty().withMessage('El el precio del Procuto no puede ir vacio')
-        .custom((value)=> value > 0 ).withMessage('Precio no valido') // puesto customizar mis validaciones ede esta manera
-        .run(req) // los metodos del validator exige simpre un await y  para que tenga el efecto le tengo que recuperar los datos del req en RUN
+        .custom((value)=> value > 0 ).withMessage('Precio no valido') // puedo customizar mis validaciones ede esta manera
+        .run(req) // los metodos del validator exige siempre un await y  para que tenga el efecto le tengo que recuperar los datos del req en RUN
     
     handleInputErrors(req,res,next)
 

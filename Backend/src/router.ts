@@ -17,6 +17,7 @@ router.post('/', ValidationProduct, createProducto)
 
 router.put('/:id',
     param('id').isInt().withMessage('ID no valido'),
+    ValidationProduct,
     handleInputErrors,
     updateProduct)
 
