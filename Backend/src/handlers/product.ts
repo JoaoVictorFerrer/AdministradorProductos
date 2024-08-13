@@ -3,7 +3,6 @@ import Product from "../models/Product.models"
 
 
 export const getProducts = async (req : Request, res : Response ) => {
-   try {
     
        const products = await Product.findAll({
         //    order: [
@@ -13,12 +12,10 @@ export const getProducts = async (req : Request, res : Response ) => {
        })
        res.json({ data: products })
     
-   } catch (error) {
-    console.log(error)
-   }
+
 }
 export const getByIdProducts = async (req : Request, res : Response ) => {
-   try {
+ 
        const { id } = req.params
        const product = await Product.findByPk(id)
 
@@ -27,9 +24,7 @@ export const getByIdProducts = async (req : Request, res : Response ) => {
        }
 
        res.json({data:product})
-   } catch (error) {
-    console.log(error)
-   }
+
 }
 
 
@@ -40,17 +35,14 @@ export const createProducto = async (req : Request, res : Response ) => {
     // res.json({data:savedProduct})
 
     //? Otra forma mas limpia
-    try {
         
         const product = await Product.create(req.body)
         res.status(201).json({data:product})
-    } catch (error) {
-        console.log(error)
-    }
+
 }
 
 export const updateProduct = async (req: Request, res: Response) => {
-    try {
+
 
         //Compruebo si existe el producto
         const { id } = req.params
@@ -66,12 +58,9 @@ export const updateProduct = async (req: Request, res: Response) => {
         await product.save() // despues de actualizarlo lo guardo en la BBDD
  
         res.json({data:product})
-    } catch (error) {
-        console.log(error)
-    }
+
 }
 export const updateAvailability = async (req: Request, res: Response) => {
-    try {
 
         //Compruebo si existe el producto
         const { id } = req.params
@@ -86,14 +75,11 @@ export const updateAvailability = async (req: Request, res: Response) => {
         product.availability = !product.dataValues.availability // en vez de utilizarr el update() y mandar el dato por el body ya le asigno a ese campo el valor contrario que tiene en base de datos accediendo atraves de dataValues.
         await product.save() // despues de actualizarlo lo guardo en la BBDD
  
-        res.json({data:product})
-    } catch (error) {
-        console.log(error)
-    }
+    res.json({ data: product })
+    
 }
 
 export const deleteProducto = async (req: Request, res: Response) => {
-    try {
 
         //Compruebo si existe el producto
         const { id } = req.params
@@ -108,7 +94,4 @@ export const deleteProducto = async (req: Request, res: Response) => {
        await product.destroy()
        res.json({ data: 'Producto Eliminado' })
         
-    } catch (error) {
-        console.log(error)
-    }
 }
