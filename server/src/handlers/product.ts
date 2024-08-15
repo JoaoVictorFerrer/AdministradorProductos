@@ -5,10 +5,10 @@ import Product from "../models/Product.models"
 export const getProducts = async (req : Request, res : Response ) => {
     
        const products = await Product.findAll({
-        //    order: [
-        //        ['price', 'ASC'] //que me traiga los datos de menor a mayor y DESC de mayor a menor  ,
-        //    ],
-        //    limit: 2
+           order: [
+               ['id', 'ASC'] //que me traiga los datos de menor a mayor y DESC de mayor a menor  ,
+           ],
+           limit: 10
        })
        res.json({ data: products })
     
@@ -75,7 +75,7 @@ export const updateAvailability = async (req: Request, res: Response) => {
         product.availability = !product.dataValues.availability // en vez de utilizarr el update() y mandar el dato por el body ya le asigno a ese campo el valor contrario que tiene en base de datos accediendo atraves de dataValues.
         await product.save() // despues de actualizarlo lo guardo en la BBDD
  
-    res.json({ data: product })
+         res.json({ data: product })
     
 }
 
